@@ -24,7 +24,8 @@
             height: 100%;
             border: none;
             display: block;
-            overflow: auto; /* Allow scrolling inside the iframe */
+            transform-origin: top left; /* Scale from top-left */
+            transform: scale(1); /* Default scale */
         }
 
         /* Overlay to hide the ad */
@@ -37,17 +38,32 @@
             background-color: rgba(255, 255, 255, 1); /* Semi-transparent */
             z-index: 10; /* Ensure the overlay is on top */
         }
-
-        body.device-mobile-optimized:not(.responsive) #SITE_CONTAINER {
-            width: 100%;
-        }
-
     </style>
 </head>
 <body>
     <div id="iframe-container">
-        <iframe src="https://tusharbhanushali06.wixsite.com/my-site-3" frameborder="0"></iframe>
+        <iframe id="myIframe" src="https://tusharbhanushali06.wixsite.com/my-site-3" frameborder="0"></iframe>
         <div id="ad-overlay"></div> <!-- Overlay to hide the ad -->
     </div>
+
+    <script>
+        const iframe = document.getElementById("myIframe");
+
+        iframe.onload = function () {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+            // Get the actual width of the iframe's content
+            const contentWidth = iframeDoc.body.scrollWidth;
+
+            // Get the visible width of the iframe container
+            const containerWidth = iframe.parentElement.offsetWidth;
+
+            // Calculate the required scale
+            const scale = containerWidth / contentWidth;
+
+            // Apply the scale transformation to the iframe
+            iframe.style.transform = `scale(${scale})`;
+        };
+    </script>
 </body>
 </html>
