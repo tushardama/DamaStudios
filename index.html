@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dama Studios</title>
-    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
     <style>
         * {
             margin: 0;
@@ -20,50 +19,25 @@
         }
 
         iframe {
+            margin-top: -60px;
             width: 100%;
-            height: 100%;
+            height: 108vh;
             border: none;
             display: block;
-            transform-origin: top left; /* Scale from top-left */
-            transform: scale(1); /* Default scale */
+            overflow: auto; /* Allow scrolling inside the iframe */
         }
 
-        /* Overlay to hide the ad */
-        #ad-overlay {
-            position: absolute;
-            top: 0; /* Position the overlay at the top */
-            left: 0;
-            width: 100%;
-            height: 50px; /* Height of the ad (adjust as necessary) */
-            background-color: rgba(255, 255, 255, 1); /* Semi-transparent */
-            z-index: 10; /* Ensure the overlay is on top */
+        @media screen and (max-width: 480px) {
+            iframe{
+                margin-top: -50px;
+            }
         }
+
     </style>
 </head>
 <body>
     <div id="iframe-container">
-        <iframe id="myIframe" src="https://tusharbhanushali06.wixsite.com/my-site-3" frameborder="0"></iframe>
-        <div id="ad-overlay"></div> <!-- Overlay to hide the ad -->
+        <iframe src="https://tusharbhanushali06.wixsite.com/my-site-3" frameborder="0"></iframe>
     </div>
-
-    <script>
-        const iframe = document.getElementById("myIframe");
-
-        iframe.onload = function () {
-            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-
-            // Get the actual width of the iframe's content
-            const contentWidth = iframeDoc.body.scrollWidth;
-
-            // Get the visible width of the iframe container
-            const containerWidth = iframe.parentElement.offsetWidth;
-
-            // Calculate the required scale
-            const scale = containerWidth / contentWidth;
-
-            // Apply the scale transformation to the iframe
-            iframe.style.transform = `scale(${scale})`;
-        };
-    </script>
 </body>
 </html>
